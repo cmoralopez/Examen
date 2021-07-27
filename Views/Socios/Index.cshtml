@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Examen.Models.Socio>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cedula
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Direccion
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Codigo }, new { onclick = "return confirm('¿Está seguro de editar?')" }) |
+                @Html.ActionLink("Detalles", "Details", new { Codigo = item.Codigo }) |
+                @if (item.Estado == 1)
+                {
+                    @Html.ActionLink("Desactivar", "Desactivar", new { id = item.Codigo }, new { onclick = "return confirm('¿Está seguro de Desactivar?')" })
+                }
+                else
+                {
+                    @Html.ActionLink("Activar", "Activar", new { id = item.Codigo }, new { onclick = "return confirm('¿Está seguro de Activar?')" })
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
